@@ -58,6 +58,5 @@ module.exports = {
     */
     extend(config, ctx) {
     }
-  },
-  buildDir: 'dist'
+  }
 }
