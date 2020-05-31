@@ -13,8 +13,8 @@
 
           <tbody>
             <tr v-for="(usuario, index) in usuarios" :key="index">
-              <td>{{usuario.usuario}}</td>
-              <td>{{usuario.edad}}</td>
+              <td>{{ usuario.usuario }}</td>
+              <td>{{ usuario.edad }}</td>
             </tr>
           </tbody>
         </table>
@@ -28,26 +28,26 @@ import Logo from '~/components/Logo.vue'
 import axios from '@nuxtjs/axios'
 export default {
   components: {
-    Logo
+    Logo,
   },
 
   data() {
     return {
-      usuarios: []
+      usuarios: [],
     }
   },
   beforeMount() {
     this.$axios
-      .get('https://api-bebidas-ugb.herokuapp.com/usuarios')
-      .then(result => {
-        this.usuarios = result.data.ok.map(element => {
+      .get('https://api.server.saynets.com/usuarios')
+      .then((result) => {
+        this.usuarios = result.data.ok.map((element) => {
           return {
             usuario: `${element.nombre} ${element.apellido}`,
-            edad: element.edad
+            edad: element.edad,
           }
         })
       })
-  }
+  },
 }
 </script>
 
