@@ -13,8 +13,20 @@
 
           <tbody>
             <tr v-for="(usuario, index) in usuarios" :key="index">
-              <td>{{usuario.nombre}} {{usuario.apellido}}</td>
-              <td>{{usuario.edad}}</td>
+              <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
+              <td>{{ usuario.edad }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <thead>
+            <th>tipo</th>
+          </thead>
+
+          <tbody>
+            <tr v-for="(bebida, index) in bebidas" :key="index">
+              <td>{{ bebida.tipo }}</td>
             </tr>
           </tbody>
         </table>
@@ -25,15 +37,20 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
-import axios from '@nuxtjs/axios'
 export default {
   components: {
     Logo
   },
 
   async asyncData({ $axios, params }) {
-    const { data } = await $axios.get(`https://api.server.saynets.com/usuarios`)
-    return { usuarios: data.ok }
+    const data_user = await $axios.get(
+      `https://api.server.saynets.com/usuarios`
+    )
+    const data_bebidas = await $axios.get(
+      `https://api.server.saynets.com/bebidas`
+    )
+
+    return { bebidas: data_bebidas.data.ok, usuarios: data_user.data.ok }
   },
   beforeMount() {
     // this.$axios
@@ -46,6 +63,7 @@ export default {
     //       }
     //     })
     //   })
+    console.log(this.bebidas)
     console.log(this.usuarios)
   }
 }
